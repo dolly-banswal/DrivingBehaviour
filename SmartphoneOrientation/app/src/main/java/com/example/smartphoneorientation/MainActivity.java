@@ -431,6 +431,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void startData(){
         Toast.makeText(getApplicationContext(), "Sensor Started", Toast.LENGTH_SHORT).show();
+        String timeStamp2 = new SimpleDateFormat("yyyy-MM-dd_HH;mm;ss", Locale.getDefault()).format(new Date());
+        
         //Audio Recording
 
         if(checkPermission()) {
@@ -438,9 +440,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             /*AudioSavePathInDevice =
                     Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
                             CreateRandomAudioFileName(5) + "AudioRecording.3gp";*/
-
-            AudioSavePathInDevice = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/" +
-                    CreateRandomAudioFileName(5) + "AudioRecording.3gp";
+            
+             AudioSavePathInDevice = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/" +
+                    timeStamp2 + ".3gp";
 
             MediaRecorderReady();
 
@@ -463,9 +465,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             /*AudioSavePathInDevice =
                     Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
                             CreateRandomAudioFileName(5) + "AudioRecording.3gp";*/
-
-            AudioSavePathInDevice = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getAbsolutePath() + "/" +
-                    CreateRandomAudioFileName(5) + "AudioRecording.3gp";
+            
+             AudioSavePathInDevice = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/" +
+                    timeStamp2 + ".3gp";
 
             MediaRecorderReady();
 
@@ -488,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if (accelerometer != null) {
-            sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(MainActivity.this, accelerometer, 20000);
             Log.d(TAG, "onCreate: Registered acceleromer listner");
         } else {
             xValue.setText("Accelerometer not Supported ");
@@ -498,7 +500,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         /*
         mGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         if (mGyro != null) {
-            sensorManager.registerListener(MainActivity.this, mGyro, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(MainActivity.this, mGyro, 20000);
             Log.d(TAG, "onCreate: Registered Gyro listner");
         } else {
             xGyroValue.setText("Gyroscope not Supported ");
@@ -508,7 +510,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
          */
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         if (magnetometer != null) {
-            sensorManager.registerListener(MainActivity.this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(MainActivity.this, magnetometer, 20000); 
             Log.d(TAG, "onCreate: Registered magnetometer listner");
         } else {
             xMagneValue.setText("Magnetometer not Supported ");
